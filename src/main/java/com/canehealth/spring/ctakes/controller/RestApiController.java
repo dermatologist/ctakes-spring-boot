@@ -6,6 +6,9 @@ package com.canehealth.spring.ctakes.controller;
  */
 
 
+import org.apache.uima.cas.text.AnnotationIndex;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.tcas.Annotation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import akka.actor.ActorSystem;
+import com.typesafe.config.ConfigFactory;
+import org.apache.uima.UIMAFramework;
+import org.apache.uima.cas.*;
+import org.apache.uima.jcas.JCas.*;
+import org.apache.uima.jcas.cas.*;
+import org.apache.uima.util.XMLInputSource.*;
 
 @RestController
 @RequestMapping("/api")
@@ -20,6 +30,9 @@ public class RestApiController {
 
     public static final Logger logger = LoggerFactory.getLogger(RestApiController.class);
 
+
+    @Autowired
+    private ActorSystem actorSystem;
 
     // -------------------Retrieve Single User------------------------------------------
 
@@ -42,6 +55,13 @@ public class RestApiController {
     public ResponseEntity<?> process_history(@RequestParam("text") String text) {
         logger.info(text);
         return new ResponseEntity<>(text, HttpStatus.OK);
+    }
+
+    public String cas2FeatureMap(JCas jcas){
+        AnnotationIndex<Annotation> anIndex = jcas.getAnnotationIndex();
+        FSIterator<Annotation> anIter = anIndex.iterator();
+
+        return "";
     }
 
 }
