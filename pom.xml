@@ -22,13 +22,16 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<ctakes.version>4.0.0</ctakes.version>
 	</properties>
 
 	<dependencies>
+        <!--
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-rest</artifactId>
 		</dependency>
+		-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
@@ -42,17 +45,112 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+        <!--
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		-->
+        <!--
 		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<dependency>
+        -->
+        <!-- Additional -->
+        <dependency>
+            <groupId>org.apache.ctakes</groupId>
+            <artifactId>ctakes-clinical-pipeline</artifactId>
+            <version>${ctakes.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.ctakes</groupId>
+            <artifactId>ctakes-ytex</artifactId>
+            <version>${ctakes.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.ctakes</groupId>
+            <artifactId>ctakes-assertion-zoner</artifactId>
+            <version>${ctakes.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.mastif</groupId>
+            <artifactId>mastif-i2b2</artifactId>
+            <version>1.4</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.mitre</groupId>
+                    <artifactId>jcarafe-core_2.9.1</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!--dependency>
+            <groupId>net.sf.carafe.jcarafe</groupId>
+            <artifactId>jcarafe-core_2.9.1</artifactId>
+            <version>0.9.8.3.RC4</version>
+        </dependency-->
+
+
+        <dependency>
+            <groupId>xml-apis</groupId>
+            <artifactId>xml-apis</artifactId>
+            <version>1.4.01</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.ctakes</groupId>
+            <artifactId>ctakes-constituency-parser</artifactId>
+            <version>${ctakes.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.cleartk</groupId>
+            <artifactId>cleartk-ml</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.cleartk</groupId>
+            <artifactId>cleartk-ml-liblinear</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-actor_2.11</artifactId>
+            <version>2.3.7</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.uima/uimaj-json -->
+        <dependency>
+            <groupId>org.apache.uima</groupId>
+            <artifactId>uimaj-json</artifactId>
+            <version>2.8.1</version>
+        </dependency>
+
+
+        <!-- Additional Ends -->
+
+        <!-- Spring Framework Caching Support -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.hazelcast</groupId>
+            <artifactId>hazelcast</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.hazelcast</groupId>
+            <artifactId>hazelcast-spring</artifactId>
+        </dependency>
+
+        <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
