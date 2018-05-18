@@ -22,7 +22,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.io.StringWriter;
 import java.net.MalformedURLException;
 
@@ -52,14 +51,24 @@ public class CtakesService {
     }
 
     @Cacheable(value = "ctakes")
-    public String Jcas2json(String note) throws UIMAException, IOException {
+    public String Jcas2json(String note) throws UIMAException {
+        jcas.reset();
         jcas.setDocumentText(note);
         SimplePipeline.runPipeline(jcas, aed);
         CAS cas = jcas.getCas();
         JsonCasSerializer jcs = new JsonCasSerializer();
-        jcs.setPrettyPrint(true); // do some configuration
+        jcs.setPrettyPrint(false); // do some configuration
+        //jcs.setJsonContext(JsonCasSerializer.JsonContextFormat.omitSubtypes);
         StringWriter sw = new StringWriter();
         jcs.serialize(cas, sw); // serialize into sw
+//        try {
+//            jcs.serialize(cas, sw);
+//            //jcs.setTypeSystemReference()
+//        }
+//        catch (IOException e) {
+//            // Warning: There is a possible exception to handle!
+//            // throw e;
+//        }
         return sw.toString();
     }
 
