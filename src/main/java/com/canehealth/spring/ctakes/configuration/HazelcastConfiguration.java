@@ -21,25 +21,7 @@ public class HazelcastConfiguration {
                 .setInstanceName("hazelcast-instance")
                 .addMapConfig(
                         new MapConfig()
-                                .setName("pubmed")
-                                .setMaxSizeConfig(new MaxSizeConfig(200, MaxSizeConfig.MaxSizePolicy.FREE_HEAP_SIZE))
-                                .setEvictionPolicy(EvictionPolicy.LRU)
-                                .setTimeToLiveSeconds(86400))
-                .addMapConfig(
-                        new MapConfig()
-                                .setName("rysannmd")
-                                .setMaxSizeConfig(new MaxSizeConfig(200, MaxSizeConfig.MaxSizePolicy.FREE_HEAP_SIZE))
-                                .setEvictionPolicy(EvictionPolicy.LRU)
-                                .setTimeToLiveSeconds(86400))
-                .addMapConfig(
-                        new MapConfig()
-                                .setName("dermquest")
-                                .setMaxSizeConfig(new MaxSizeConfig(200, MaxSizeConfig.MaxSizePolicy.FREE_HEAP_SIZE))
-                                .setEvictionPolicy(EvictionPolicy.LRU)
-                                .setTimeToLiveSeconds(86400))
-                .addMapConfig(
-                        new MapConfig()
-                                .setName("fuseki")
+                                .setName("ctakes")
                                 .setMaxSizeConfig(new MaxSizeConfig(200, MaxSizeConfig.MaxSizePolicy.FREE_HEAP_SIZE))
                                 .setEvictionPolicy(EvictionPolicy.LRU)
                                 .setTimeToLiveSeconds(86400));
