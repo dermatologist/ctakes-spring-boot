@@ -48,14 +48,14 @@ public class RestApiController {
         return new ResponseEntity<>(ctakesService.Jcas2json(text), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/text", method = RequestMethod.GET)
+    @RequestMapping(value = "/api", method = RequestMethod.GET)
     public ResponseEntity<?> get_text(@RequestParam(value = "text", required = false) String text) throws IOException, UIMAException {
         logger.info(text);
         return new ResponseEntity<>(ctakesService.Jcas2json(text), HttpStatus.OK);
 
     }
 
-    @RequestMapping(value = "/text", method = RequestMethod.POST)
+    @RequestMapping(value = "/api", method = RequestMethod.POST)
     public ResponseEntity<?> post_text(@RequestParam("text") String text) throws IOException, UIMAException {
         logger.info(text);
         return new ResponseEntity<>(ctakesService.Jcas2json(text), HttpStatus.OK);

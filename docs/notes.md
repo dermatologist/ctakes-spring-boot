@@ -13,3 +13,7 @@ I checked out lvg from svn.code.sf.net/p/ctakesresources/code/trunk/
 >
 
 ```
+
+# If you are using the DEFAULT clinical pipeline
+
+* Copy the LookupDesc_Db.xml file to target / classes / org / apache / ctakes / dictionary / lookup / LookupDesc_Db.xml 
