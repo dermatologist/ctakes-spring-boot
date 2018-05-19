@@ -38,7 +38,7 @@ public class CtakesService {
     public final AnalysisEngineDescription aed;
 
     @Value("${ctakes.pipeline}")
-    private String pipeline;
+    private String pipeline = "FAST";
 
     @Autowired
     private ActorSystem system;

@@ -13,13 +13,19 @@ Hazelcast caching is added.
 * STEP 3: mvn spring-boot:repackage
 * STEP 4: Follow steps below so that the org folder is inside 'classes')
 
-```$xslt
+```
+
 wget http://sourceforge.net/projects/ctakesresources/files/ctakes-resources-4.0-bin.zip
 unzip ctakes-resources-4.0-bin.zip
 cp -r resources/org/ target/classes 
+
 
 ```
 * STEP 5: mvn spring-boot:run and access the application at 
 http://localhost:8080/api?text=papules on the face
 
 * STEP 6 (If you select DEFAULT in STEP 2): Copy the LookupDesc_Db.xml file in the doc folder to target / classes / org / apache / ctakes / dictionary / lookup / LookupDesc_Db.xml 
+
+## Author
+
+Bell Eapen (McMaster U)

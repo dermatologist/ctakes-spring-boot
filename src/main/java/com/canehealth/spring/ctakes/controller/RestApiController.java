@@ -42,7 +42,7 @@ public class RestApiController {
 
     // {id} @PathVariable /  @RequestBody for post
     // http://websystique.com/spring-boot/spring-boot-rest-api-example/
-    @RequestMapping(value = "/api", method = RequestMethod.POST)
+    @RequestMapping(value = "/body", method = RequestMethod.POST)
     public ResponseEntity<?> post_text_body(@RequestBody String text) throws IOException, UIMAException {
         logger.info(text);
         return new ResponseEntity<>(ctakesService.Jcas2json(text), HttpStatus.OK);
