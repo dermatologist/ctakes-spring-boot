@@ -17,6 +17,10 @@ import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.json.JsonCasSerializer;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheConfig;
@@ -86,13 +90,63 @@ public class CtakesService {
         CAS cas = jcas.getCas();
         JsonCasSerializer jcs = new JsonCasSerializer();
         jcs.setPrettyPrint(true); // do some configuration
-        jcs.setJsonContext(JsonCasSerializer.JsonContextFormat.omitSubtypes);
-        jcs.setJsonContext(JsonCasSerializer.JsonContextFormat.omitContext);
-        jcs.setJsonContext(JsonCasSerializer.JsonContextFormat.omitExpandedTypeNames);
+//        jcs.setJsonContext(JsonCasSerializer.JsonContextFormat.omitSubtypes);
+//        jcs.setJsonContext(JsonCasSerializer.JsonContextFormat.omitContext);
+//        jcs.setJsonContext(JsonCasSerializer.JsonContextFormat.omitExpandedTypeNames);
 
         StringWriter sw = new StringWriter();
         jcs.serialize(cas, sw); // serialize into sw
-        return sw.toString();
+        return jsonClinical(sw.toString(), note);
+        //return sw.toString();
+    }
+
+    public String jsonClinical(String ctakes, String note) {
+        JSONParser jsonParser = new JSONParser();
+        JSONObject obj = new JSONObject();
+        try {
+            obj = (JSONObject) jsonParser.parse(ctakes);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        obj = (JSONObject) obj.get("_views");
+        obj = (JSONObject) obj.get("_InitialView");
+        JSONArray MedicationMention = (JSONArray) obj.get("MedicationMention");
+        JSONArray AnatomicalSiteMention = (JSONArray) obj.get("AnatomicalSiteMention");
+        JSONArray DiseaseDisorderMention = (JSONArray) obj.get("DiseaseDisorderMention");
+        JSONArray SignSymptomMention = (JSONArray) obj.get("SignSymptomMention");
+        JSONArray ProcedureMention = (JSONArray) obj.get("ProcedureMention");
+        JSONArray WordToken = (JSONArray) obj.get("WordToken");
+
+        JSONObject output = new JSONObject();
+        output.put("MedicationMention", parseJsonMention(note, WordToken, MedicationMention));
+        output.put("AnatomicalSiteMention", parseJsonMention(note, WordToken, AnatomicalSiteMention));
+        output.put("DiseaseDisorderMention", parseJsonMention(note, WordToken, DiseaseDisorderMention));
+        output.put("SignSymptomMention", parseJsonMention(note, WordToken, SignSymptomMention));
+        output.put("ProcedureMention", parseJsonMention(note, WordToken, ProcedureMention));
+        // output.put("Original", obj);
+        return output.toJSONString();
+    }
+
+    private JSONArray parseJsonMention(String document, JSONArray wordtoken, JSONArray jsonArray) {
+
+        JSONArray output = new JSONArray();
+        for (int i = 0, size = jsonArray.size(); i < size; i++) {
+            JSONObject objectInArray = (JSONObject) jsonArray.get(i);
+            long begin = (long) objectInArray.get("begin");
+            long end = (long) objectInArray.get("end");
+            String original_word = document.substring((int) begin, (int) end);
+            String canonical_form = "";
+            for (int i2 = 0, size2 = wordtoken.size(); i2 < size2; i2++) {
+                JSONObject tokenInArray = (JSONObject) wordtoken.get(i2);
+                long begin2 = (long) tokenInArray.get("begin");
+                long end2 = (long) tokenInArray.get("end");
+                if (begin == begin2 && end == end2) canonical_form = (String) tokenInArray.get("canonicalForm");
+            }
+            objectInArray.put("originalWord", original_word);
+            objectInArray.put("canonicalForm", canonical_form);
+            output.add(objectInArray);
+        }
+        return output;
     }
 
 }
