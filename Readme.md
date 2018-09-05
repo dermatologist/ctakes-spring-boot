@@ -1,4 +1,4 @@
-# Ctakes-spring-boot
+# Ctakes-spring-boot 
 
 ## Ctakes
 
@@ -26,6 +26,7 @@ http://localhost:8080/api?text=papules on the face
 
 * STEP 6 (If you select DEFAULT in STEP 2): Copy the LookupDesc_Db.xml file in the doc folder to target / classes / org / apache / ctakes / dictionary / lookup / LookupDesc_Db.xml 
 
-## Author
+## Contributors
 
-Bell Eapen (McMaster U)
+* [Bell Eapen](https://nuchange.ca) (McMaster U)
+* inspired by [this repo](https://github.com/GoTeamEpsilon/ctakes-rest-service).
