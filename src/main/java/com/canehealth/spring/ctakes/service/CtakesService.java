@@ -130,21 +130,23 @@ public class CtakesService {
     private JSONArray parseJsonMention(String document, JSONArray wordtoken, JSONArray jsonArray) {
 
         JSONArray output = new JSONArray();
-        for (int i = 0, size = jsonArray.size(); i < size; i++) {
-            JSONObject objectInArray = (JSONObject) jsonArray.get(i);
-            long begin = (long) objectInArray.get("begin");
-            long end = (long) objectInArray.get("end");
-            String original_word = document.substring((int) begin, (int) end);
-            String canonical_form = "";
-            for (int i2 = 0, size2 = wordtoken.size(); i2 < size2; i2++) {
-                JSONObject tokenInArray = (JSONObject) wordtoken.get(i2);
-                long begin2 = (long) tokenInArray.get("begin");
-                long end2 = (long) tokenInArray.get("end");
-                if (begin == begin2 && end == end2) canonical_form = (String) tokenInArray.get("canonicalForm");
+        if(jsonArray != null) {
+            for (int i = 0, size = jsonArray.size(); i < size; i++) {
+                JSONObject objectInArray = (JSONObject) jsonArray.get(i);
+                long begin = (long) objectInArray.get("begin");
+                long end = (long) objectInArray.get("end");
+                String original_word = document.substring((int) begin, (int) end);
+                String canonical_form = "";
+                for (int i2 = 0, size2 = wordtoken.size(); i2 < size2; i2++) {
+                    JSONObject tokenInArray = (JSONObject) wordtoken.get(i2);
+                    long begin2 = (long) tokenInArray.get("begin");
+                    long end2 = (long) tokenInArray.get("end");
+                    if (begin == begin2 && end == end2) canonical_form = (String) tokenInArray.get("canonicalForm");
+                }
+                objectInArray.put("originalWord", original_word);
+                objectInArray.put("canonicalForm", canonical_form);
+                output.add(objectInArray);
             }
-            objectInArray.put("originalWord", original_word);
-            objectInArray.put("canonicalForm", canonical_form);
-            output.add(objectInArray);
         }
         return output;
     }
