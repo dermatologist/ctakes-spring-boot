@@ -8,9 +8,9 @@ Hazelcast caching is added.
 
 ## How to Use
 
-* STEP 1: Add UMLS username and password in CtakesApplication.java
+* STEP 1: Clone this repo and add UMLS username and password in CtakesApplication.java
 * STEP 2: Add the pipeline in application properties (FAST is recommended)
-* STEP 3: mvn spring-boot:repackage
+* STEP 3: mvn clean install spring-boot:repackage
 * STEP 4: Follow steps below so that the org folder is inside 'classes')
 
 ```
