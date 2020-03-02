@@ -1,5 +1,9 @@
 # Ctakes-spring-boot 
 
+## Deprecated: [Use this one instead](https://github.com/E-Health/ctakes-rest-service).
+
+### Planning a container optimized rewrite in [Quarkus](https://quarkus.io/). 
+
 ## Ctakes
 
 Apache cTAKES™ is a natural language processing system for extraction of information from electronic medical record clinical free-text.
